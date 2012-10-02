@@ -26,7 +26,7 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to 'Webistrano', root_path, class: 'brand' %>
+          <%= link_to 'Butler', root_path, class: 'brand' %>
           <nav>
             <ul class="nav pull-right">
               <li><%= link_to 'Projects', projects_path %></li>
@@ -74,7 +74,7 @@
       </div>
 
       <footer class="footer pull-right">
-        <p>Copyright &copy; 2007, 2008, 2009 | Version <%= WEBISTRANO_VERSION %> | <a href="http://labs.peritor.com/webistrano" target="_blank">http://labs.peritor.com/webistrano</a></p>
+        <p>Copyright &copy; <%= [2012,Date.current.year].uniq.join('-') %> General Scripting UG (haftungsbeschränkt) | Version <%= WEBISTRANO_VERSION %> | <a href="http://labs.general-scripting.com/butler" target="_blank">http://labs.general-scripting.com/butler</a></p>
       </footer>
     </div>
 
