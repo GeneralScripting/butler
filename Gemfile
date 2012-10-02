@@ -14,6 +14,7 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'haml'
 
+gem 'libv8', '~> 3.11.8'
 gem 'sqlite3'
 
 group :development do
