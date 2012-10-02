@@ -1,0 +1,20 @@
+- content_for(:page_title) do
+  - @page_title = "New user for project #{@project.name}"
+  %h1 Add user to project
+
+- content_for(:breadcrumb) do
+  = breadcrumb_box do
+    = link_to "Projects", projects_path
+    %span.divider &raquo;
+    = link_to @project.name, project_path(@project)
+    %span.divider &raquo;
+    Add user
+
+- flashed_errors(:project_access)
+
+%section
+  = form_for @project_access, url: project_project_accesses_path(@project), html: { class: "form-horizontal" } do |f|
+    = render partial: 'form', locals: { form: f }
+    .form-actions
+      = f.submit 'add this user', class: "btn btn-primary"
+      = link_to 'Back to project', project_path(@project), :class => 'btn'

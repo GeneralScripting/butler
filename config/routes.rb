@@ -16,6 +16,7 @@ Webistrano::Application.routes.draw do
 
   resources :projects do
     resources :project_configurations
+    resources :project_accesses, :path => 'users', :controller => 'project_users'
     resources :stages do
       member do
         get  :tasks

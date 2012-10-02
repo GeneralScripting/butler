@@ -12,6 +12,7 @@
   <% end -%>
 </section>
 
+<% if @activities %>
 <section>
   <h2>Recent activities</h2>
   <% if @activities.empty? %>
@@ -56,3 +57,4 @@
     </table>
   <% end %>
 </section>
+<% end -%>

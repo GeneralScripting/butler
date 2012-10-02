@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803083647) do
+ActiveRecord::Schema.define(:version => 20121002085255) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -62,6 +62,19 @@ ActiveRecord::Schema.define(:version => 20120803083647) do
     t.datetime "updated_at"
     t.datetime "deleted_at"
   end
+
+  create_table "project_accesses", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "mode"
+    t.datetime "deleted_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "project_accesses", ["mode"], :name => "index_project_accesses_on_mode"
+  add_index "project_accesses", ["project_id"], :name => "index_project_accesses_on_project_id"
+  add_index "project_accesses", ["user_id"], :name => "index_project_accesses_on_user_id"
 
   create_table "project_configurations", :force => true do |t|
     t.datetime "deleted_at"

@@ -6,23 +6,22 @@ class ProjectsController < ApplicationController
 
   # GET /projects/dashboard
   def dashboard
-    @deployments = Deployment.find(:all, :limit => 10, :order =>
-      'created_at DESC')
-    @activities = Activity.find(:all, :limit => 10, :order => 'created_at DESC')
+    @deployments = Deployment.order('created_at DESC').limit(10)
+    @activities = Activity.order('created_at DESC').limit(10)     if current_user.admin?
     respond_with(@deployments)
   end
 
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.find(:all, :order => 'name ASC')
+    @projects = @project_base.find(:all, :order => 'name ASC')
     respond_with(@projects)
   end
 
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    @project = Project.find(params[:id])
+    @project = @project_base.find(params[:id])
     respond_with(@project)
   end
 
@@ -41,14 +40,14 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1;edit
   def edit
-    @project = Project.find(params[:id])
+    @project = @project_base.find(params[:id])
     respond_with @project
   end
 
   # POST /projects
   # POST /projects.xml
   def create
-    @project = Project.unscoped.where(params[:project]).first_or_create
+    @project = @project_base.unscoped.where(params[:project]).first_or_create
 
     if load_clone_original
       action_to_render = 'clone'
@@ -73,7 +72,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-    @project = Project.find(params[:id])
+    @project = @project_base.find(params[:id])
 
     if @project.update_attributes(params[:project])
       add_activity_for(@project, 'updated')
@@ -87,7 +86,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.xml
   def destroy
-    @project = Project.find(params[:id])
+    @project = @project_base.find(params[:id])
     @project.delete_logically_with_asscociation
     add_activity_for(@project, 'deleted')
 
@@ -108,7 +107,7 @@ private
 
   def load_clone_original
     if params[:clone]
-      @original = Project.unscoped.find(params[:clone])
+      @original = @project_base.unscoped.find(params[:clone])
     else
       false
     end

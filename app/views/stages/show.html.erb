@@ -81,13 +81,13 @@
 <section>
   <h2>Used recipes</h2>
   <%= render partial: 'recipes' %>
-  <%= link_to 'Manage stage recipes', { action: 'recipes', project_id: current_project, id: @stage } %>
+  <% if current_user.admin? %><%= link_to 'Manage stage recipes', { action: 'recipes', project_id: current_project, id: @stage } %><% end -%>
 </section>
 
 <section>
   <h2>Deployed hosts</h2>
   <%= render partial: 'roles' %>
-  <%= link_to 'Add host', new_project_stage_role_path(current_project, @stage) %>
+  <% if current_user.admin? %><%= link_to 'Add host', new_project_stage_role_path(current_project, @stage) %><% end -%>
 </section>
 
 <section>

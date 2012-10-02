@@ -135,6 +135,8 @@ EOS
     case model_class
     when 'stage'
       project_stage_path(target.project, target)
+    when 'projectaccess'
+      project_path(target.project)
     when 'role'
       project_stage_role_path(target.stage.project, target.stage, target)
     else

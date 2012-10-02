@@ -1,0 +1,4 @@
+.control-group
+  = form.label :user, class: "control-label"
+  .controls
+    = form.select :user_id, User.nonadmins.without(@project.users).collect {|u| [u.name, u.id] }, class: "select"

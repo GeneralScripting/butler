@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :ensure_not_disabled
+  before_filter :set_finder_base
   around_filter :set_timezone
 
   layout 'application'
@@ -21,8 +22,16 @@ class ApplicationController < ActionController::Base
     Time.zone = 'UTC'
   end
 
+  def set_finder_base
+    if user_signed_in?
+      @project_base = current_user.admin? ? Project : current_user.projects
+    else
+      @project_base = Project
+    end
+  end
+
   def load_project
-    @project = Project.find(params[:project_id])
+    @project = @project_base.find(params[:project_id])
   end
 
   def load_stage

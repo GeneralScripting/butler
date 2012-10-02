@@ -49,9 +49,11 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
+        <% if signed_in? -%>
         <div class="span3">
           <%= render "layouts/menu" %>
         </div>
+        <% end -%>
         <div class="span9">
           <%= yield :breadcrumb %>
           <%= yield :flash_content %>

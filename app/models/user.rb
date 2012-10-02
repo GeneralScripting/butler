@@ -11,14 +11,18 @@ class User < ActiveRecord::Base
 
   has_many :deployments, :dependent => :nullify, :order => 'created_at DESC'
   has_many :activities, :as => :target, :dependent => :destroy
+  has_many :project_accesses
+  has_many :projects, :through => :project_accesses
 
   validates_presence_of   :login
   validates_length_of     :login, :within => 3..40
   validates_uniqueness_of :login, :case_sensitive => false
 
-  scope :enabled,  where(:disabled_at => nil)
-  scope :disabled, where("disabled_at IS NOT NULL")
-  scope :admins,   where(:admin => true, :disabled_at => nil)
+  scope :enabled,   where(:disabled_at => nil)
+  scope :disabled,  where("disabled_at IS NOT NULL")
+  scope :admins,    where(:admin => true, :disabled_at => nil)
+  scope :nonadmins, where(:admin => false, :disabled_at => nil)
+  scope :without,   lambda {|users| where('id NOT IN (?)', users.empty? ? [0] : users) }
 
   validate :guard_last_admin, :on => :update
 

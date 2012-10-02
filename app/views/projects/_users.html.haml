@@ -1,0 +1,15 @@
+- if @project.users.empty?
+  %p
+    No users added (besides admins)
+- else
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Deployments
+    %tbody
+      - @project.users.each do |user|
+        %tr
+          %td= user.name
+          %td= user.deployments.count
+          %td= link_to 'remove', project_project_access_path(@project, user), data: { confirm: 'Are you sure?' }, method: :delete

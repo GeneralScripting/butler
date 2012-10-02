@@ -5,6 +5,8 @@ class Project < ActiveRecord::Base
   has_many :deployments, :through => :stages
   has_many :configuration_parameters, :dependent => :destroy, :class_name => "ProjectConfiguration", :order => 'name ASC'
   has_many :activities, :as => :target, :dependent => :destroy
+  has_many :project_accesses
+  has_many :users, :through => :project_accesses
 
   validates :name,
     :uniqueness => true,
