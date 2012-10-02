@@ -14,9 +14,9 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'haml'
 
-group :development do
-  gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'sqlite3'
 
+group :development do
   gem 'guard-bundler'
   gem 'guard-livereload'
   gem 'rack-livereload'
@@ -30,7 +30,6 @@ group :development do
 end
 
 group :test do
-  gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'test-unit'
   gem 'mocha'
   gem 'factory_girl_rails'
