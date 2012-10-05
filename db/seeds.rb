@@ -11,4 +11,4 @@ User.create!(
   :email => 'admin@example.com',
   :password => 'admin!',
   :password_confirmation => 'admin!'
-).make_admin!
+).make_admin! unless User.exists?

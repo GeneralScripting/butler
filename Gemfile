@@ -6,6 +6,7 @@ gem 'exception_notification'
 
 gem 'capistrano'
 gem 'rvm-capistrano'
+gem 'airbrake'
 gem 'bundler'
 gem 'open4',      '0.9.3'
 gem 'syntax',     '1.0.0'
