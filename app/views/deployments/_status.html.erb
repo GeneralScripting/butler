@@ -63,6 +63,7 @@
       $.ajax({
          type:     "GET",
          url:      "<%= project_stage_deployment_path(@project, @stage, @deployment) %>.js",
+         cache:    false,
          dataType: "html",
          success: function (res) {
            var needScroll = $('#auto_scroll_log').is(':checked');
