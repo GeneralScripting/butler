@@ -49,7 +49,7 @@
   </div>
 
   <div class="log_output">
-    <pre><%= @deployment.log.gsub('\n', "\n") rescue '' %></pre>
+    <pre><%= (@deployment.log || '').gsub('\n', "\n") %></pre>
   </div>
 
   <div>
